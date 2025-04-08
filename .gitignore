@@ -1,0 +1,3 @@
+autoTestRun/__pycache__
+autoTestRun/libs/windows/x86/*.*
+autoTestRun/libs/windows/x86_64/*.*
