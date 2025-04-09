@@ -1,0 +1,142 @@
+LIN_description_file ;
+LIN_protocol_version = "2.1" ;
+LIN_language_version = "2.1" ;
+LIN_speed = 19.200 kbps ;
+Nodes {
+    Master:PDCF,5.0000 ms,1.0000 ms ;
+    Slaves:ECF;
+}
+Diagnostic_addresses {
+}
+Signals {
+    EnableReq_ECF:1,0x0,PDCF,ECF;
+    SpeedReq_ECF:8,0x00,PDCF,ECF;
+    ECF_EnableSt:1,0x0,ECF,PDCF;
+    ECF_WorkingSt:1,0x0,ECF,PDCF;
+    ECF_WorkingMode:2,0x0,ECF,PDCF;
+    ECF_Speed:8,0x00,ECF,PDCF;
+    ECF_Voltage:9,0x00,ECF,PDCF;
+    ECF_Current:10,0x00,ECF,PDCF;
+    ECF_Power:10,0x00,ECF,PDCF;
+    ECF_FaultSt:1,0x0,ECF,PDCF;
+    ECF_CommunicationError:1,0x0,ECF,PDCF;
+    ECF_VoltageError:2,0x0,ECF,PDCF;
+    ECF_OverTempError:1,0x0,ECF,PDCF;
+    ECF_HardwareError:1,0x0,ECF,PDCF;
+    ECF_StallError:1,0x0,ECF,PDCF;
+    ECF_OverCurrentError:1,0x0,ECF,PDCF;
+}
+Frames {
+    PDCF_ECFControl:0x2D,PDCF,8{
+        EnableReq_ECF,0;
+        SpeedReq_ECF,8;
+    }
+    ECF_State:0x2E,ECF,8{
+        ECF_OverCurrentError,63;
+        ECF_Current,30;
+        ECF_WorkingMode,2;
+        ECF_Speed,8;
+        ECF_EnableSt,0;
+        ECF_HardwareError,61;
+        ECF_Voltage,16;
+        ECF_OverTempError,60;
+        ECF_CommunicationError,57;
+        ECF_VoltageError,58;
+        ECF_StallError,62;
+        ECF_FaultSt,56;
+        ECF_Power,40;
+        ECF_WorkingSt,1;
+    }
+}
+Node_attributes {
+}
+Schedule_tables {
+    ECF_SCHEDULE {
+        PDCF_ECFControl delay 100.0000 ms ;
+        ECF_State delay 100.0000 ms ;
+    }
+}
+Signal_groups {
+}
+Signal_encoding_types {
+    ENABLE {
+        logical_value,0x00,"DISABLE" ;
+        logical_value,0x01,"ENABLE" ;
+    }
+    SpeedReq {
+        physical_value,0,255,15,0,"RPM" ;
+    }
+    ECF_EnableSt {
+        logical_value,0x00,"DISABLE" ;
+        logical_value,0x01,"ENABLE" ;
+    }
+    ECF_WorkingSt {
+        logical_value,0x00,"IDLE" ;
+        logical_value,0x01,"RUN" ;
+    }
+    ECF_WorkingMode {
+        logical_value,0x00,"IDLE" ;
+        logical_value,0x01,"OPEN" ;
+        logical_value,0x02,"CLOSED" ;
+    }
+    ECF_Speed {
+        physical_value,0,200,15,0,"RPM" ;
+    }
+    ECF_Voltage {
+        physical_value,0,511,0.1000,0.0000,"V" ;
+    }
+    ECF_Current {
+        physical_value,0,1023,0.1000,0.0000,"A" ;
+    }
+    ECF_Power {
+        physical_value,0,1000,1.0000,0.0000,"W" ;
+    }
+    ECF_FaultSt {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"ERROR" ;
+    }
+    ECF_CommunicationError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"ERROR" ;
+    }
+    ECF_VoltageError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"UNDER VOL" ;
+        logical_value,0x02,"OVER VOL" ;
+        logical_value,0x03,"RESERVED" ;
+    }
+    ECF_OverTempError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"OVER TEMP" ;
+    }
+    ECF_HardwareError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"HW ERR" ;
+    }
+    ECF_StallError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"STALL" ;
+    }
+    ECF_OverCurrentError {
+        logical_value,0x00,"NO ERR" ;
+        logical_value,0x01,"OVER CURRENT" ;
+    }
+}
+Signal_representation {
+    ENABLE:EnableReq_ECF;
+    SpeedReq:SpeedReq_ECF;
+    ECF_EnableSt:ECF_EnableSt;
+    ECF_WorkingSt:ECF_WorkingSt;
+    ECF_WorkingMode:ECF_WorkingMode;
+    ECF_Speed:ECF_Speed;
+    ECF_Voltage:ECF_Voltage;
+    ECF_Current:ECF_Current;
+    ECF_Power:ECF_Power;
+    ECF_FaultSt:ECF_FaultSt;
+    ECF_CommunicationError:ECF_CommunicationError;
+    ECF_VoltageError:ECF_VoltageError;
+    ECF_OverTempError:ECF_OverTempError;
+    ECF_HardwareError:ECF_HardwareError;
+    ECF_StallError:ECF_StallError;
+    ECF_OverCurrentError:ECF_OverCurrentError;
+}
